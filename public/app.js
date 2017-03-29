@@ -23,14 +23,14 @@ MapWrapper.prototype = {
     })   
   }, 
   addClickEvent: function(){
-    google.maps.event.addListener(this.googleMap, "click", function(event){ // need three arguments
+   marker.addListener(this.googleMap, "click", function(event){ // need three arguments
     //   var lat = event.latLng.lat();
     //   var long =event.latLng.lng();
     //   var center = {lat: 55.750330332, lng: 37.609330896};
     //   this.addMarker(center);
     // }.bind(this));
 
-     infowindow.open(map, marker);
+     infowindow.open(this.googleMap, this);
     })
   }
 
@@ -44,7 +44,7 @@ var app = function(){
   var zoom =16;
   var mainMap = new MapWrapper(container, center, zoom);
   mainMap.addMarker(center);
-  // mainMap.addClickEvent();
+  mainMap.addClickEvent();
 
 };
 
