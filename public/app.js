@@ -12,29 +12,26 @@ var infowindow = new google.maps.InfoWindow({
   content: contentString
 });
 
-var marker; 
-
 MapWrapper.prototype = {
   addMarker: function(coords){
-      marker = new google.maps.Marker({
+    var marker = new google.maps.Marker({
       position:coords, 
       map: this.googleMap,
       animation: google.maps.Animation.BOUNCE
-    })   
+    });
+    marker.addListener("click", function(){
+      infowindow.open(this.googleMap, marker);
+    }.bind(this));
   }, 
   addClickEvent: function(){
-   marker.addListener(this.googleMap, "click", function(event){ // need three arguments
-    //   var lat = event.latLng.lat();
-    //   var long =event.latLng.lng();
-    //   var center = {lat: 55.750330332, lng: 37.609330896};
-    //   this.addMarker(center);
-    // }.bind(this));
-
-     infowindow.open(this.googleMap, this);
-    })
-  }
-
-};
+    google.maps.event.addListener(this.googleMap, "click", function(event){ // need three arguments
+      var lat = event.latLng.lat();
+      var long =event.latLng.lng();
+      var center = {lat: lat, lng: long};
+      this.addMarker(center);
+    }.bind(this));
+  }, 
+}
 
 
 
