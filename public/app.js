@@ -12,26 +12,26 @@ var infowindow = new google.maps.InfoWindow({
   content: contentString
 });
 
+var marker; 
+
 MapWrapper.prototype = {
   addMarker: function(coords){
-    var marker = new google.maps.Marker({
+      marker = new google.maps.Marker({
       position:coords, 
       map: this.googleMap,
       animation: google.maps.Animation.BOUNCE
-    });
+    })   
   }, 
   addClickEvent: function(){
     google.maps.event.addListener(this.googleMap, "click", function(event){ // need three arguments
-      var lat = event.latLng.lat();
-      var long =event.latLng.lng();
-      var center = {lat: 55.750330332, lng: 37.609330896};
-      this.addMarker(center);
-    }.bind(this));
-  }, 
-  addInfoBox: function(click, function(){
-    infowindow.open(this, marker)
-  }){
-    
+    //   var lat = event.latLng.lat();
+    //   var long =event.latLng.lng();
+    //   var center = {lat: 55.750330332, lng: 37.609330896};
+    //   this.addMarker(center);
+    // }.bind(this));
+
+     infowindow.open(map, marker);
+    })
   }
 
 };
@@ -45,7 +45,6 @@ var app = function(){
   var mainMap = new MapWrapper(container, center, zoom);
   mainMap.addMarker(center);
   // mainMap.addClickEvent();
-  mainMap.addInfoBox;
 
 };
 
